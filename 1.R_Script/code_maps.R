@@ -13,7 +13,9 @@ library(gpclib)
 library(maptools)
 library(showtext)
 
+#Cargar fuente de letra
 font_add_google("Lora", family = "Lora")
+showtext_auto()
 
 ## Carga de shapefiles de los estados para asignarlos a capa_estados
 capa_estados <-readOGR("~/Desktop/Marcela/RNPS/code_mapas/shapemex", layer="areas_geoestadisticas_estatales")
