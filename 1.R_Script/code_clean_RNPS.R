@@ -1,11 +1,17 @@
 #Instalar paquetes
 install.packages("tidyverse")
+install.packages("showtext")
 
 #Cargar paquetes
 library(tidyverse) 
 library(readxl)
+library(showtext)
 
 #Fijar directorio de trabajo 
+
+#Cargar fuente de letra
+font_add_google("Lora", family = "Lora")
+showtext_auto()
 
 #Importar archivos
 ## Base 1: Proyecciones poblacionales a mitad de año - CONAPO
@@ -64,9 +70,10 @@ datos_RNPS_exp<- datos_RNPS %>%
 
 datos_RNPS_tipo_v<- read_csv("datos_RNPS_tipo_v.csv") 
 
-ggplot(datos_RNPS_tipo_v, aes(x=`Tipo de violencia`, y=`Total de expedientes`)) +
+ggplot(datos_RNPS_tipo_v, aes(x=reorder(`Tipo de violencia`,-`Total de expedientes`),y=`Total de expedientes`)) +
   geom_bar(stat='identity', fill="tomato3", width = .9)+
-  labs(title = "Tipo de violencia acreditada en expedientes por Violencia Política \ncontra las Mujeres en Razón de Género") +
+  labs(title = "Tipo de violencia acreditada en expedientes por Violencia Política \ncontra las Mujeres en Razón de Género",
+       x="Tipo de violencia") +
   theme_minimal() +
   theme(panel.grid.major =element_blank(),
         #panel.grid.minor =element_blank(),
